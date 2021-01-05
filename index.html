@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Task Manager</title>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <div data-widget="task-widget">
+    <form>
+      <label>Создать задачу: <input data-id="task-text" name="task-text"></label>
+      <button data-action="task">Создать</button>
+      <h5 class="no-filled-input hidden">Введите название задачи пожалуйста</h5>
+    </form>
+  </div>
+  <div data-section="pinned-tasks">
+    <h3 class="tasks">Закрепленные задачи</h3>
+    <span class="no-pinned-tasks">У Вас нет закрепленных задач</span>
+    <span class="no-filtered-pinned-tasks hidden">Поиск не дал результатов</span>
+    <ul data-section="pinned-tasks-list"></ul>
+  </div>
+  <div data-section="tasks">
+    <h3 class="tasks">Задачи</h3>
+    <span class="no-tasks">У Вас нет задач</span>
+    <span class="no-filtered-tasks hidden">Поиск не дал результатов</span>
+    <ul data-section="tasks-list"></ul>
+  </div>
+</body>
+</html>
