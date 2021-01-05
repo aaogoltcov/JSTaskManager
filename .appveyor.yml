@@ -9,8 +9,8 @@ install:
 build: off
 build_script:
   - yarn build # команда сборки
-test_script:
-  - npm test # скрипт тестирования
+#test_script:
+#  - yarn test # скрипт тестирования
 environment:
   access_token:
     secure: zvJf04PyuDyqf4jjwwyBrw9chz6Q9x7OeBPN0jYQ9Y80ygA4VMOO4pimFzC8jgyt
