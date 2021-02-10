@@ -1,1 +1,1 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/babt05gq7tx3y3au/branch/master?svg=true)](https://ci.appveyor.com/project/aaogoltcov/jsyarn/branch/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/201l2lc49jhhd3ry?svg=true)](https://ci.appveyor.com/project/aaogoltcov/jstaskmanager)
