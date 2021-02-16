@@ -57,6 +57,7 @@ export default class taskManager {
         this.addNewTask(this.taskInput.value);
         this.redrawLists(this.allTasks);
         this.taskInput.value = '';
+        console.log(this.allTasks);
 
         if (!messageNotFilledInput.classList.contains('hidden')) {
           messageNotFilledInput.classList.add('hidden');
@@ -94,7 +95,16 @@ export default class taskManager {
 
   addNewTask(task) { this.allTasks.push({checked: false, task: `${task}`, id: `${Date.now()}`}) }
 
+  removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+      parent.removeChild(parent.firstChild);
+    }
+  }
+
   redrawLists(array) {
+    this.removeAllChildNodes(this.tasksField);
+    this.removeAllChildNodes(this.pinedTasksField);
+
     for (let element of array) {
       if (!element.checked) {
         this.tasksField.insertAdjacentHTML('beforeend',
