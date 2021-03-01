@@ -27,23 +27,22 @@ export default class taskManager {
     this.taskInput.addEventListener('input', () => {
       this.allFilteredTasks = Array();
       this.allTasks.forEach(value => {
-        if (!value.checked) {
-          if (value.task.toLowerCase().includes(this.taskInput.value.trim().toLowerCase())) {
-            this.allFilteredTasks.push(value);
-          }
+        if (value.task.toLowerCase().includes(this.taskInput.value.trim().toLowerCase())) {
+          this.allFilteredTasks.push(value);
         }
       })
 
       this.tasksField.innerHTML = '';
       this.pinedTasksField.innerHTML = '';
 
-      if (this.taskInput.value > 0) {
+      if (this.taskInput.value.length > 0) {
         this.mode = 'search';
         this.redrawLists(this.allFilteredTasks);
       } else {
         this.mode = 'show';
         this.redrawLists(this.allTasks);
       }
+
     })
   }
 
@@ -51,13 +50,12 @@ export default class taskManager {
     this.newTaskButton.addEventListener('click', event => {
       event.preventDefault();
       const messageNotFilledInput = document.querySelector('.no-filled-input');
+      this.mode = 'show';
 
       if (this.taskInput.value.length > 0) {
-        this.mode = 'show';
         this.addNewTask(this.taskInput.value);
         this.redrawLists(this.allTasks);
         this.taskInput.value = '';
-        console.log(this.allTasks);
 
         if (!messageNotFilledInput.classList.contains('hidden')) {
           messageNotFilledInput.classList.add('hidden');
@@ -104,17 +102,25 @@ export default class taskManager {
   redrawLists(array) {
     this.removeAllChildNodes(this.tasksField);
     this.removeAllChildNodes(this.pinedTasksField);
-
-    for (let element of array) {
-      if (!element.checked) {
-        this.tasksField.insertAdjacentHTML('beforeend',
-          `<div class="task"><input type="checkbox" data-id=${element.id}><li>${element.task}</li></div>`)
+    if (this.mode === 'search') {
+      for (let element of array) {
+        if (!element.checked) {
+          this.tasksField.insertAdjacentHTML('beforeend',
+            `<div class="task"><input type="checkbox" data-id=${element.id}><li>${element.task}</li></div>`)
+        } else {
+          this.pinedTasksField.insertAdjacentHTML('beforeend',
+            `<div class="task"><input type="checkbox" data-id=${element.id} checked><li>${element.task}</li></div>`)
+        }
       }
-    }
-    for (let element of this.allTasks) {
-      if (element.checked) {
-        this.pinedTasksField.insertAdjacentHTML('beforeend',
-          `<div class="task"><input type="checkbox" data-id=${element.id} checked><li>${element.task}</li></div>`)
+    } else if (this.mode === 'show') {
+      for (let element of this.allTasks) {
+        if (!element.checked) {
+          this.tasksField.insertAdjacentHTML('beforeend',
+            `<div class="task"><input type="checkbox" data-id=${element.id}><li>${element.task}</li></div>`)
+        } else {
+          this.pinedTasksField.insertAdjacentHTML('beforeend',
+            `<div class="task"><input type="checkbox" data-id=${element.id} checked><li>${element.task}</li></div>`)
+        }
       }
     }
     this.messageTreatment();
